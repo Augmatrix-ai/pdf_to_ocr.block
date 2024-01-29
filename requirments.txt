@@ -1,0 +1,12 @@
+google==3.0.0
+pdfminer.six==20231228
+numpy
+hyper[h2]
+pyfury
+pyopenssl
+twisted[http2]==17.1.0
+bson
+pyarrow
+service-identity
+msgpack
+gunicorn
