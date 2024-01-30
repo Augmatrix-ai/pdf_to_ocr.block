@@ -1,7 +1,8 @@
 from typing import Dict, Union
+from ocr_struct import Inputs, Outputs
+from augmatrix.block_service.data_context import encode, decode, FunctionArguments
 from operations import digitized_pdf_ocr
-from http2_service_runner import ServerManager, ServiceRunner
-from ocr_struct import Outputs, OCRElement
+from augmatrix.block_service.service_runner import ServerManager, ServiceRunner
 import msgpack
 
 class OCRTask(ServiceRunner):
@@ -13,7 +14,7 @@ class OCRTask(ServiceRunner):
         logger (object): A logger object to log messages and errors.
         """
         self.logger = logger
-        super().__init__()
+        super().__init__(Inputs, Outputs, FunctionArguments)
 
     def run(self, pdf: bytes) -> Dict:
         """
@@ -32,16 +33,12 @@ class OCRTask(ServiceRunner):
         ocr_json = ocr_engine.ocrinfo
         raw_text = ocr_engine.raw_text
 
-#        new_ocrinfo = []
-#        for ocr_elm in ocr_engine.ocrinfo:
-#            new_ocrinfo.append(OCRElement(**ocr_elm))
-
         return {"ocr_json": ocr_json, "raw_text": raw_text}
 
 if __name__ == "__main__":
     ServerManager(OCRTask(logger=None)).start(
-        host="0.0.0.0",
-        port=80,
-#        private_key="certificates/private.pem",
- #       cert_key="certificates/cert.pem"
+        host="localhost",
+        port=8083,
+        # private_key="certificates/private.pem",
+        # cert_key="certificates/cert.pem"
     )

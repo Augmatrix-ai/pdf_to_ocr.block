@@ -1,4 +1,5 @@
-from ocr_struct import encode, decode, FunctionArguments, Inputs, Outputs
+from augmatrix.block_service.data_context import encode, decode, FunctionArguments 
+from ocr_struct import Inputs, Outputs
 from hyper import HTTPConnection
 import ssl
 import msgpack
@@ -15,14 +16,14 @@ def send_request(connection, url, data, method='POST', content_type='application
 def main():
     # Specify the server's hostname and port
     host = 'localhost'
-    port = 8089
+    port = 8083
 
     # Set up the SSL context (assuming your server uses SSL)
-    ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ssl_context.load_cert_chain(certfile="certificates/cert.pem", keyfile="certificates/private.pem", password=None)
+    # ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    # ssl_context.load_cert_chain(certfile="certificates/cert.pem", keyfile="certificates/private.pem", password=None)
 
     # Create an HTTP/2 connection using hyper
-    connection = HTTPConnection(host, port, secure=True, ssl_context=ssl_context)
+    connection = HTTPConnection(host, port, secure=False, ssl_context=None)
 
     inputs = None
     with open("testdata/single_pdf.pdf", "rb") as fr:
