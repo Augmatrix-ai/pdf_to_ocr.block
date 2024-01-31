@@ -1,0 +1,39 @@
+{
+    "outputs_schema": {
+        "ocr_json": {
+            "title": "OCR Json",
+            "vis_type": 1,
+            "type_text": "JSON"
+        },
+        "raw_text": {
+            "title": "OCR Text",
+            "vis_type": 4,
+            "type_text": "Text"
+        }
+    },
+    "inputs_schema": {
+        "pdf": {
+            "title": "PDF",
+            "is_required": true,
+            "type_text": "PDF"
+        }
+    },
+    "block_properties": {
+        "selected_ocr_type": {
+            "ocr_name": "Digital PDF OCR",
+            "ocr_id": "digitized_pdf_ocr"
+        }
+    },
+    "func_args_schema": {
+        "properties": {
+            "title": "block properties Json",
+            "is_required": true,
+            "type_text": "JSON"
+        },
+        "credentials": {
+            "title": "key value credentials",
+            "is_required": true,
+            "type_text": "JSON"
+        }
+    }
+}
