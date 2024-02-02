@@ -1,9 +1,8 @@
-from augmatrix.block_service.data_context import encode, decode 
+from augmatrix.block_service.data_context import encode, decode, decode_to_object 
 from augmatrix.datasets import variable_def_to_dataclass
 from hyper import HTTPConnection
 import ssl
 import msgpack
-import bson
 import json
 
 
@@ -40,12 +39,12 @@ def main():
         inputs_data = encode(inputs)
         data_dict = {'func_args': func_args_data, 'inputs': inputs_data}
 
-        b_data = bson.dumps(data_dict)
+        b_data = encode(data_dict)
 
         # Send data to the server and process the response
-        response_data = send_request(connection, '/', data=b_data)
+        response_data = decode(send_request(connection, '/', data=b_data))
 
-        outputs = decode(response_data, outputs_dataclass)
+        outputs = decode_to_object(response_data, outputs_dataclass)
 
         print(outputs.ocr_json)
         print(outputs.raw_text)

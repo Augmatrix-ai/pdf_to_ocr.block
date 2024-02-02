@@ -12,7 +12,7 @@ class OCRTask(ServiceRunner):
         logger (object): A logger object to log messages and errors.
         """
         self.logger = logger
-        super().__init__()
+        super().__init__(structure_json_path='./structure.json')
 
     def run(self, inputs, properties, credentials):
         """

@@ -1,4 +1,5 @@
 {
+    "algoType": "Map",
     "outputs_schema": {
         "ocr_json": {
             "title": "OCR Json",
