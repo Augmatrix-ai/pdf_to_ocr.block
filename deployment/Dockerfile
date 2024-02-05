@@ -11,8 +11,6 @@ RUN apt-get update && \
     libmysqlclient-dev \
     build-essential \
     python3-virtualenv \
-    redis-server \
-    mysql-client \
     poppler-utils \
     ghostscript \
     curl \
