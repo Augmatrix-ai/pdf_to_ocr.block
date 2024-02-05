@@ -2,33 +2,36 @@ FROM ubuntu:focal-20230605
 
 # Set the timezone without interaction
 ENV DEBIAN_FRONTEND=noninteractive
-
+# Update the package repository and install necessary packages
 RUN apt-get update && \
     apt-get install -y \
     zip \
+    python3-dev \
     python3-pip \
-    python3.8 \
-    pkg-config \
+    libmysqlclient-dev \
     build-essential \
-    vim \
+    python3-virtualenv \
+    redis-server \
+    mysql-client \
+    poppler-utils \
+    ghostscript \
     curl \
 	git \
     screen && \
-    apt-get install -y tzdata && \
-
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata && \
+    apt-get install -y libglib2.0-0 libgl1 
 # Set the timezone without interaction
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata
+ENV TZ=UTC
+# Set the timezone without interaction
 
 # Copy files
-COPY pdf_to_ocr.block /pdf_to_ocr.block
-COPY requirments.txt .
-COPY entrypoint.sh .
+RUN mkdir /app
+COPY ./ /app/.
+COPY /deployment/entrypoint.sh .
 
 # Install Python packages
-RUN pip3 install -r requirments.txt
-RUN pip install git+https://github.com/Augmatrix-ai/augmatrixOS.git
+RUN pip3 install -r /app/requirments.txt
+
 # Set permissions and convert line endings
 RUN chmod +x entrypoint.sh && \
     sed -i -e 's/\r$//' entrypoint.sh

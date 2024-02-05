@@ -1,5 +1,5 @@
 #!/bin/bash
-pushd /pdf_to_ocr.block 
+pushd /app 
 python3 main.py
 popd
 exec "$@"
