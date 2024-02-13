@@ -9,12 +9,17 @@ def main():
         inputs = {
             "pdf": fr.read()
         }
-        properties = {}
+        properties = {
+            "selected_ocr_type": {
+                "ocr_name": "Digital PDF OCR",
+                "ocr_id": "digitized_pdf_ocr"
+            }
+        }
         credentials = {}
 
         # Call the function with the specified inputs, properties, and credentials
         outputs = client.call_function(
-            structure_path="structure.json",
+            structure="structure.json",
             func_args=properties,
             inputs=inputs,
             credentials=credentials

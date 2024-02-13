@@ -19,12 +19,6 @@
             "type_text": "PDF"
         }
     },
-    "block_properties": {
-        "selected_ocr_type": {
-            "ocr_name": "Digital PDF OCR",
-            "ocr_id": "digitized_pdf_ocr"
-        }
-    },
     "func_args_schema": {
         "properties": {
             "title": "block properties Json",
